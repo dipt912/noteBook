@@ -7,6 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware} from 'redux';
 import reducer from './reducers';
 import ReduxThunk from 'redux-thunk';
+import history from './history'
+
 
 
 const reduxApp = (

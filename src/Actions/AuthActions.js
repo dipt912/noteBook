@@ -6,6 +6,7 @@ import {
     LOGIN_USER
 } from './types';
 import firebase from 'firebase';
+import history from '../history'; 
 
 export const onChangeEmail = (text) => {
     return {
@@ -34,6 +35,7 @@ export const onLogin = ({ email, password }) => {
 }
 
 const logInUserSucesss = (dispatch, user) => {
+    history.push('/notes');
     dispatch({
         type: LOGIN_USER_SUCCESS,
         payload: user

@@ -5,6 +5,8 @@ import Login from './components/Login';
 import NavBar from './components/navbar';
 
 import Footer from './components/footer';
+import Notes from './components/Notes';
+import CreateNote from './components/CreateNote';
 
 class AppRouter extends Component {
     render() {
@@ -14,6 +16,8 @@ class AppRouter extends Component {
                 <div>
                 <NavBar />
                     <Route exact path="/" component={Login} />
+                    <Route exact path="/notes" component={Notes} />
+                    <Route exact path="/createNote" component={CreateNote} />
                 <Footer />
                 </div>
                 

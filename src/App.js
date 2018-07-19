@@ -4,6 +4,7 @@ import '../node_modules/materialize-css/dist/js/materialize.min.js';
 import './App.css';
 import AppRouter from './Router';
 import firebase from 'firebase';
+import history from '../src/history';
 
 class App extends Component {
   componentWillMount() {
@@ -21,7 +22,7 @@ class App extends Component {
     return (
       <div>
 
-        <AppRouter />
+        <AppRouter history={history}/>
 
       </div>
     );
