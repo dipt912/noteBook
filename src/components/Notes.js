@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Notes extends Component {
     render() {
         return (
-            <div className="center-align">
+            <div className="center-align verical-align">
             <div class="divider"></div>
                 <Link
                     className="btn-floating btn-large waves-effect waves-light red"

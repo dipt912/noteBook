@@ -343,4 +343,8 @@ form > .row {
     height: 100%;
     position: absolute;
 }
+.verical-align {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
