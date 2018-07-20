@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import {
     onChangeName,
     onChangeKeywordText,
     onChangeNoteText,
     onChangeKeywordUpdate,
-    onRemoveKey
+    onRemoveKey,
+    onCreateNote
 } from '../Actions';
 import { Chips } from './common';
 
@@ -50,6 +51,35 @@ class CreateNote extends Component {
         this.props.onRemoveKey(i);
     }
 
+    onCreateNote(){
+        const { name, noteText, keywords } = this.props.createNote;
+        const { history } = this.props;
+        this.props.onCreateNote({name, noteText, keywords, history });
+    }
+    
+    renderCreateNoteButton() {
+        const { createNoteProgress } = this.props.createNote;
+        if (createNoteProgress) {
+            return (
+                <div className="progress">
+                    <div className="indeterminate"></div>
+                </div>
+            )
+        }
+        return (
+            <input type="submit" className="btn" value="Create" onClick={this.onCreateNote.bind(this)}/>
+        )
+    }
+
+    displayError() {
+        const { error } = this.props.auth;
+        if (error !== '') {
+            return (
+                <div className="red-text text-darken-2">  {error}</div>
+            )
+
+        }
+    }
 
 
     render() {
@@ -102,7 +132,13 @@ class CreateNote extends Component {
                                 <label >Notes</label>
                             </div>
                         </div>
+                        
                     </form>
+
+                    <div className="row">
+                            {this.renderCreateNoteButton()}
+                        </div>
+                    
                 </div>
             </div>
         )
@@ -121,5 +157,6 @@ export default withRouter(connect(mapStateToProps, {
     onChangeKeywordText,
     onChangeNoteText,
     onChangeKeywordUpdate,
-    onRemoveKey
+    onRemoveKey,
+    onCreateNote
 })(CreateNote));

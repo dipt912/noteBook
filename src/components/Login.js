@@ -16,7 +16,6 @@ class Login extends Component {
     onLogin() {
         const { history } = this.props;
         const { email, password } = this.props.auth
-        console.log(email, password);
         this.props.onLogin({ email, password, history })
     }
     renderLoginButton() {

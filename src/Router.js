@@ -15,11 +15,18 @@ class AppRouter extends Component {
 
         if(!user){
             return (
+            <Switch>
                 <Route exact path="/" component={Login} />
+            </Switch>
             )
         }
         return (
-            <Route exact path="/" component={Notes} />
+            
+            <Switch>
+                    <Route exact path="/" component={Notes} />
+                    <Route exact path="/notes" component={Notes} />
+                    <Route exact path="/createNote" component={CreateNote} />
+                </Switch>
         )
     }
 
@@ -29,12 +36,12 @@ class AppRouter extends Component {
 
                 <div>
                 <NavBar />
-                <Switch>
+                {/* <Switch> */}
                     {this.renderLandingPage()}
-                    <Route exact path="/" component={Login} />
-                    <Route exact path="/notes" component={Notes} />
+                    
+                    {/* <Route exact path="/notes" component={Notes} />
                     <Route exact path="/createNote" component={CreateNote} />
-                </Switch>
+                </Switch> */}
                 <Footer />
                 </div>
 
