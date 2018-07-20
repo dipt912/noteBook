@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Btn } from './common';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import { onChangeEmail, onChangePassword, onLogin } from '../Actions';
 
 class Login extends Component {
@@ -13,9 +14,10 @@ class Login extends Component {
         this.props.onChangePassword(e.target.value);
     }
     onLogin() {
+        const { history } = this.props;
         const { email, password } = this.props.auth
         console.log(email, password);
-        this.props.onLogin({ email, password })
+        this.props.onLogin({ email, password, history })
     }
     renderLoginButton() {
         const { loading } = this.props.auth;
@@ -75,31 +77,31 @@ class Login extends Component {
                                 <div className="card">
                                     <div className="card-content">
                                         <span className="card-title teal-text">Sign In</span>
-                                        
+
                                             <div className="row">
                                                 <div className="input-field col s12">
-                                                    <input 
-                                                    placeholder="abc@xyz.com" 
-                                                    value={email} id="email" 
+                                                    <input
+                                                    placeholder="abc@xyz.com"
+                                                    value={email} id="email"
                                                     type="text"
-                                                     className="validate teal-text" 
+                                                     className="validate teal-text"
                                                      onChange={this.userNameChange.bind(this)} />
                                                     <label for="email" className="active">Email</label>
                                                 </div>
                                             </div>
                                             <div className="row">
                                                 <div className="input-field col s12">
-                                                    <input 
-                                                    placeholder="password" 
+                                                    <input
+                                                    placeholder="password"
                                                     value={password}
-                                                     id="password" 
-                                                     onChange={this.passwordChange.bind(this)} 
-                                                     type="password" 
+                                                     id="password"
+                                                     onChange={this.passwordChange.bind(this)}
+                                                     type="password"
                                                     className="validate teal-text" />
                                                     <label for="password" className="active">password</label>
                                                 </div>
                                             </div>
-                                       
+
                                     </div>
                                     {this.displayError()}
                                     <div className="card-action">
@@ -123,4 +125,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { onChangeEmail, onChangePassword, onLogin })(Login);
+export default withRouter(connect(mapStateToProps, { onChangeEmail, onChangePassword, onLogin })(Login));

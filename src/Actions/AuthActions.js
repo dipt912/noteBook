@@ -6,7 +6,7 @@ import {
     LOGIN_USER
 } from './types';
 import firebase from 'firebase';
-import history from '../history'; 
+//import history from '../history';
 
 export const onChangeEmail = (text) => {
     return {
@@ -21,20 +21,20 @@ export const onChangePassword = (text) => {
     }
 }
 
-export const onLogin = ({ email, password }) => {
+export const onLogin = ({ email, password, history }) => {
     return (dispatch) => {
         dispatch({ type: LOGIN_USER, payload: true })
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => logInUserSucesss(dispatch, user))
+            .then(user => logInUserSucesss(dispatch, user, history))
             .catch(() => {
                 firebase.auth().createUserWithEmailAndPassword(email, password)
-                    .then(user => logInUserSucesss(dispatch, user))
+                    .then(user => logInUserSucesss(dispatch, user, history))
                     .catch(() => loginUserFailed(dispatch))
             })
     }
 }
 
-const logInUserSucesss = (dispatch, user) => {
+const logInUserSucesss = (dispatch, user, history) => {
     history.push('/notes');
     dispatch({
         type: LOGIN_USER_SUCCESS,
