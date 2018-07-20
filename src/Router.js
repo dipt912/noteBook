@@ -13,20 +13,21 @@ class AppRouter extends Component {
     renderLandingPage() {
         const { user } = this.props.auth;
 
-        if(!user){
+        if (!user) {
             return (
-            <Switch>
-                <Route exact path="/" component={Login} />
-            </Switch>
+                <Switch>
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/noteBook" component={Login} />
+                </Switch>
             )
         }
         return (
-            
+
             <Switch>
-                    <Route exact path="/" component={Notes} />
-                    <Route exact path="/notes" component={Notes} />
-                    <Route exact path="/createNote" component={CreateNote} />
-                </Switch>
+                <Route exact path="/" component={Notes} />
+                <Route exact path="/notes" component={Notes} />
+                <Route exact path="/createNote" component={CreateNote} />
+            </Switch>
         )
     }
 
@@ -35,23 +36,23 @@ class AppRouter extends Component {
             <Router>
 
                 <div>
-                <NavBar />
-                {/* <Switch> */}
+                    <NavBar />
+                    {/* <Switch> */}
                     {this.renderLandingPage()}
-                    
+
                     {/* <Route exact path="/notes" component={Notes} />
                     <Route exact path="/createNote" component={CreateNote} />
                 </Switch> */}
-                <Footer />
+                    <Footer />
                 </div>
 
             </Router>
         )
     }
 }
-const mapStateTiprops = (state)=> {
+const mapStateTiprops = (state) => {
     return {
-        auth : state.auth
+        auth: state.auth
     }
 }
 

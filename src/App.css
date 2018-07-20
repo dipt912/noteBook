@@ -348,3 +348,7 @@ form > .row {
     margin-bottom: 20px;
 }
 
+.capital {
+    text-transform: capitalize;
+}
+
