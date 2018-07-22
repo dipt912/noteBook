@@ -7,6 +7,7 @@ import NavBar from './components/navbar';
 import Footer from './components/footer';
 import Notes from './components/Notes';
 import CreateNote from './components/CreateNote';
+import EditNotes from './components/EditNotes';
 import { connect } from 'react-redux';
 
 class AppRouter extends Component {
@@ -27,6 +28,7 @@ class AppRouter extends Component {
                 <Route exact path="/" component={Notes} />
                 <Route exact path="/notes" component={Notes} />
                 <Route exact path="/createNote" component={CreateNote} />
+                <Route exact path="/EditNotes/:uid" component={EditNotes} />
             </Switch>
         )
     }
@@ -50,10 +52,10 @@ class AppRouter extends Component {
         )
     }
 }
-const mapStateTiprops = (state) => {
+const mapStateToprops = (state) => {
     return {
         auth: state.auth
     }
 }
 
-export default connect(mapStateTiprops, null)(AppRouter);
+export default connect(mapStateToprops, null)(AppRouter);

@@ -7,15 +7,25 @@ import {
     onChangeNoteText,
     onChangeKeywordUpdate,
     onRemoveKey,
-    onCreateNote
+    onEditNote,
+    setSelectedNote,
+    onDeleteNote
 } from '../Actions';
 import NotesForm from './NotesForm';
+import _ from 'lodash';
 
-class CreateNote extends Component {
+class EditNotes extends Component {
+    componentDidMount(){
+        console.log(this.props.match.params);
+        const {uid} = this.props.match.params;
+        const selectedNote = _.find(this.props.notes , note => uid === note.uid);
+        console.log(selectedNote);
+        this.props.setSelectedNote(selectedNote);
+    }
 
     KeywordsSave(e) {
         if (e.keyCode === 13) {
-            const { keywordInput } = this.props.createNote;
+            const { keywordInput } = this.props.editNote;
             this.props.onChangeKeywordUpdate(keywordInput);
         }
 
@@ -39,14 +49,19 @@ class CreateNote extends Component {
         this.props.onRemoveKey(i);
     }
 
-    onCreateNote() {
-        const { name, noteText, keywords } = this.props.createNote;
+    onEditNote() {
+        const { name, noteText, keywords, uid } = this.props.editNote;
         const { history } = this.props;
-        this.props.onCreateNote({ name, noteText, keywords, history });
+        this.props.onEditNote({ name, noteText, keywords, uid ,history });
+    }
+    onDeleteNote() {
+        const { uid } = this.props.editNote;
+        const { history } = this.props;
+        this.props.onDeleteNote({  uid ,history });
     }
 
     renderCreateNoteButton() {
-        const { createNoteProgress } = this.props.createNote;
+        const { createNoteProgress } = this.props.editNote;
         if (createNoteProgress) {
             return (
                 <div className="progress">
@@ -55,7 +70,10 @@ class CreateNote extends Component {
             )
         }
         return (
-            <input type="submit" className="btn" value="Create" onClick={this.onCreateNote.bind(this)} />
+            <div>
+            <input type="submit" className="btn" value="Edit" onClick={this.onEditNote.bind(this)} />
+            <input type="submit" className="btn" value="Delete" onClick={this.onDeleteNote.bind(this)} />
+            </div>
         )
     }
 
@@ -79,7 +97,7 @@ class CreateNote extends Component {
                         updateKeyValue={this.updateKeyValue.bind(this)}
                         onChangeNoteText={this.onChangeNoteText.bind(this)}
                         onRemoveKey = {this.onRemoveKey.bind(this)}
-                        {...this.props.createNote}
+                        {...this.props.editNote}
                         />
 
                     <div className="row">
@@ -94,8 +112,13 @@ class CreateNote extends Component {
 
 const mapStateToProps = (state) => {
 
+    const noteList = _.map(state.notes, (val, uid) => {
+        return { ...val, uid };
+    })
+    console.log("notes", noteList);
     return {
-        createNote: state.createNote
+        notes: noteList,
+        editNote: state.createNote
     }
 };
 
@@ -105,5 +128,7 @@ export default withRouter(connect(mapStateToProps, {
     onChangeNoteText,
     onChangeKeywordUpdate,
     onRemoveKey,
-    onCreateNote
-})(CreateNote));
+    onEditNote,
+    setSelectedNote,
+    onDeleteNote
+})(EditNotes));

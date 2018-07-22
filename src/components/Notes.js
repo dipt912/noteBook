@@ -12,11 +12,12 @@ class Notes extends Component {
     componentWillMount(){
         this.props.notesFetch()
     }
+
     renderNotes(){
         const { notes} = this.props;;
         if(notes.length> 0){
             return notes.map((note,i)=>{
-                return <Card key={i} {...note} />
+                return <Card key={i} {...note}/>
             })
         }
     }

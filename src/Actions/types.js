@@ -16,3 +16,7 @@ export const CREATE_NOTES_SUCCESS = 'create_notes_success';
 export const CREATE_NOTES_FAILED = 'create_notes_failed';
 
 export const NOTES_FETCH_SUCESS = 'notes_fetch_sucess';
+
+export const SELECTED_NOTE = 'selected_note';
+export const EDIT_SELECTED_NOTE = 'selected_note';
+export const DELETE_SELECTED_NOTE = 'selected_note';

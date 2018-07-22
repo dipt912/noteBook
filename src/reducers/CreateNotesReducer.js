@@ -6,7 +6,10 @@ import {
     KEYWORDS_REMOVE,
     CREATE_NOTES,
     CREATE_NOTES_SUCCESS,
-    CREATE_NOTES_FAILED
+    CREATE_NOTES_FAILED,
+    SELECTED_NOTE,
+    DELETE_SELECTED_NOTE,
+    EDIT_SELECTED_NOTE
 } from '../Actions/types';
 
 const INITIAL_STATE = {
@@ -39,7 +42,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, createNoteProgress: true }
         case CREATE_NOTES_SUCCESS:
             return { ...state, ...INITIAL_STATE }
-
+        case SELECTED_NOTE:
+            return { ...state, ...action.payload }
+        case EDIT_SELECTED_NOTE:
+            return { ...INITIAL_STATE };
+        case DELETE_SELECTED_NOTE:
+            return { ...INITIAL_STATE };
 
         default:
             return state;

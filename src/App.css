@@ -352,3 +352,6 @@ form > .row {
     text-transform: capitalize;
 }
 
+.right-box {
+    float: right;
+}
