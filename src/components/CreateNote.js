@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
     onChangeName,
     onChangeKeywordText,
     onChangeNoteText,
     onChangeKeywordUpdate,
     onRemoveKey,
-    onCreateNote
+    onCreateNote,
+    resetCreateState
 } from '../Actions';
 import NotesForm from './NotesForm';
 
 class CreateNote extends Component {
+
+    componentWillMount() {
+        this.props.resetCreateState();
+    }
 
     KeywordsSave(e) {
         if (e.keyCode === 13) {
@@ -45,6 +50,7 @@ class CreateNote extends Component {
         this.props.onCreateNote({ name, noteText, keywords, history });
     }
 
+
     renderCreateNoteButton() {
         const { createNoteProgress } = this.props.createNote;
         if (createNoteProgress) {
@@ -55,7 +61,15 @@ class CreateNote extends Component {
             )
         }
         return (
-            <input type="submit" className="btn" value="Create" onClick={this.onCreateNote.bind(this)} />
+            <div>
+                <input type="submit" className="btn" value="Create" onClick={this.onCreateNote.bind(this)} />
+                <Link
+                    className="btn waves-effect waves-light"
+                    to="/notes" >
+                    cancel
+                 </Link>
+            </div>
+
         )
     }
 
@@ -73,14 +87,14 @@ class CreateNote extends Component {
         return (
             <div className="container center-align">
                 <div className="row">
-                    <NotesForm 
-                        onChangeName = {this.onChangeName.bind(this)}
+                    <NotesForm
+                        onChangeName={this.onChangeName.bind(this)}
                         KeywordsSave={this.KeywordsSave.bind(this)}
                         updateKeyValue={this.updateKeyValue.bind(this)}
                         onChangeNoteText={this.onChangeNoteText.bind(this)}
-                        onRemoveKey = {this.onRemoveKey.bind(this)}
+                        onRemoveKey={this.onRemoveKey.bind(this)}
                         {...this.props.createNote}
-                        />
+                    />
 
                     <div className="row">
                         {this.renderCreateNoteButton()}
@@ -105,5 +119,6 @@ export default withRouter(connect(mapStateToProps, {
     onChangeNoteText,
     onChangeKeywordUpdate,
     onRemoveKey,
-    onCreateNote
+    onCreateNote,
+    resetCreateState
 })(CreateNote));

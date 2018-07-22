@@ -9,7 +9,8 @@ import {
     CREATE_NOTES_FAILED,
     SELECTED_NOTE,
     DELETE_SELECTED_NOTE,
-    EDIT_SELECTED_NOTE
+    EDIT_SELECTED_NOTE,
+    RESET
 } from '../Actions/types';
 
 const INITIAL_STATE = {
@@ -17,7 +18,8 @@ const INITIAL_STATE = {
     keywords: [],
     noteText: '',
     keywordInput: '',
-    createNoteProgress: false
+    createNoteProgress: false,
+    uid: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -47,6 +49,9 @@ export default (state = INITIAL_STATE, action) => {
         case EDIT_SELECTED_NOTE:
             return { ...INITIAL_STATE };
         case DELETE_SELECTED_NOTE:
+            return { ...INITIAL_STATE };
+
+        case RESET:
             return { ...INITIAL_STATE };
 
         default:

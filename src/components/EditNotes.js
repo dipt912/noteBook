@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
     onChangeName,
     onChangeKeywordText,
@@ -15,10 +15,10 @@ import NotesForm from './NotesForm';
 import _ from 'lodash';
 
 class EditNotes extends Component {
-    componentDidMount(){
+    componentDidMount() {
         console.log(this.props.match.params);
-        const {uid} = this.props.match.params;
-        const selectedNote = _.find(this.props.notes , note => uid === note.uid);
+        const { uid } = this.props.match.params;
+        const selectedNote = _.find(this.props.notes, note => uid === note.uid);
         console.log(selectedNote);
         this.props.setSelectedNote(selectedNote);
     }
@@ -52,12 +52,12 @@ class EditNotes extends Component {
     onEditNote() {
         const { name, noteText, keywords, uid } = this.props.editNote;
         const { history } = this.props;
-        this.props.onEditNote({ name, noteText, keywords, uid ,history });
+        this.props.onEditNote({ name, noteText, keywords, uid, history });
     }
     onDeleteNote() {
         const { uid } = this.props.editNote;
         const { history } = this.props;
-        this.props.onDeleteNote({  uid ,history });
+        this.props.onDeleteNote({ uid, history });
     }
 
     renderCreateNoteButton() {
@@ -71,8 +71,13 @@ class EditNotes extends Component {
         }
         return (
             <div>
-            <input type="submit" className="btn" value="Edit" onClick={this.onEditNote.bind(this)} />
-            <input type="submit" className="btn" value="Delete" onClick={this.onDeleteNote.bind(this)} />
+                <input type="submit" className="btn" value="Edit" onClick={this.onEditNote.bind(this)} />
+                <input type="submit" className="btn" value="Delete" onClick={this.onDeleteNote.bind(this)} />
+                <Link
+                    className="btn waves-effect waves-light"
+                    to="/notes" >
+                    cancel
+                </Link>
             </div>
         )
     }
@@ -91,14 +96,14 @@ class EditNotes extends Component {
         return (
             <div className="container center-align">
                 <div className="row">
-                    <NotesForm 
-                        onChangeName = {this.onChangeName.bind(this)}
+                    <NotesForm
+                        onChangeName={this.onChangeName.bind(this)}
                         KeywordsSave={this.KeywordsSave.bind(this)}
                         updateKeyValue={this.updateKeyValue.bind(this)}
                         onChangeNoteText={this.onChangeNoteText.bind(this)}
-                        onRemoveKey = {this.onRemoveKey.bind(this)}
+                        onRemoveKey={this.onRemoveKey.bind(this)}
                         {...this.props.editNote}
-                        />
+                    />
 
                     <div className="row">
                         {this.renderCreateNoteButton()}

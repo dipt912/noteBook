@@ -7,7 +7,8 @@ import {
     CREATE_NOTES,
     CREATE_NOTES_SUCCESS,
     CREATE_NOTES_FAILED,
-    NOTES_FETCH_SUCESS
+    NOTES_FETCH_SUCESS,
+    RESET
 } from './types';
 import firebase from 'firebase';
 
@@ -69,4 +70,11 @@ export const notesFetch = () => {
                 dispatch({ type: NOTES_FETCH_SUCESS, payload: snapshot.val()})
             })
     };
+}
+
+
+export const resetCreateState=() => {
+return {
+    type: RESET
+}
 }

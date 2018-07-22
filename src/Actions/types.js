@@ -20,3 +20,5 @@ export const NOTES_FETCH_SUCESS = 'notes_fetch_sucess';
 export const SELECTED_NOTE = 'selected_note';
 export const EDIT_SELECTED_NOTE = 'selected_note';
 export const DELETE_SELECTED_NOTE = 'selected_note';
+
+export const RESET = 'reset';
