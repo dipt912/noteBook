@@ -5,7 +5,7 @@
   "license": "MIT",
   "homepage": "http://dipt912.guthub.io/noteBook",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "firebase": "^5.2.0",
     "history": "^4.7.2",
